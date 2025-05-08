@@ -1,3 +1,4 @@
+// definirea si modelarea schemei si a modelului pentru utilizatori
 const { mongoose } = require("mongoose");
 const { Schema } = mongoose;
 

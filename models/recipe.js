@@ -1,4 +1,4 @@
-const { name } = require("ejs");
+// definirea si modelarea schemei si a modelului pentru retete
 const { mongoose } = require("mongoose");
 const { Schema } = mongoose;
 

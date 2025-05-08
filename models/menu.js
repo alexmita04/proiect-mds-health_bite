@@ -1,3 +1,4 @@
+// definirea si modelarea schemei si a modelului pentru meniuri
 const { mongoose } = require("mongoose");
 const { Schema } = mongoose;
 
@@ -35,6 +36,10 @@ const menuSchema = new Schema({
   },
 });
 
+// mai jos am adaugat propietati virtuale pentru a calcula totalul caloriilor,
+// proteinelor, grasimilor si carbohidratilor din retetele incluse in meniu,
+// pentru ca n-ar fi avut niciun sens sa stocam in baza de date aceste lucruri,
+// ele fiind calculate cu date pe care le avem deja
 menuSchema.virtual("totalCalories").get(function () {
   if (!this.recipes || this.recipes.length === 0) return 0;
 
@@ -67,6 +72,8 @@ menuSchema.virtual("totalCarbohydrates").get(function () {
   }, 0);
 });
 
+// Setam ca propietatile virtuale sa fie incluse atunci cand
+// se fac conversii in json sau in obiecte
 menuSchema.set("toJSON", { virtuals: true });
 menuSchema.set("toObject", { virtuals: true });
 

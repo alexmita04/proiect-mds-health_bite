@@ -1,5 +1,5 @@
+// definirea si modelarea schemei si a modelului pentru recenzii
 const { mongoose } = require("mongoose");
-const User = require("./user");
 const { Schema } = mongoose;
 
 const reviewSchema = new Schema({
