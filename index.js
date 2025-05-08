@@ -25,9 +25,14 @@ async function main() {
 const app = express();
 
 // MIDDLEWARES
+
 //folosim method-override pentru a putea folosi metode
 // diferite fata de GET si POST in forms in html
 app.use(methodOverride("_method"));
+
+// folosim acest middleware pentru a face parsing
+// la datele trimise in request body de catre formulare
+app.use(express.urlencoded({ extended: true }));
 
 // route-ul pentru homepage
 app.get("/", (req, res) => {
