@@ -18,7 +18,7 @@ const recipeSchema = new Schema({
         required: [true, "Ingredient name is required"],
       },
       quantity: {
-        type: String,
+        type: Number,
         required: [true, "Ingredient quantity is required"],
       },
     },
