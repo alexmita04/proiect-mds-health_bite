@@ -7,6 +7,7 @@ if (process.env.NODE_ENV !== "production") {
 
 const express = require("express");
 const mongoose = require("mongoose");
+const methodOverride = require("method-override");
 
 const userRouter = require("./routes/user");
 const recipeRouter = require("./routes/recipe");
@@ -22,6 +23,11 @@ async function main() {
 
 // crearea unei aplicatii Express
 const app = express();
+
+// MIDDLEWARES
+//folosim method-override pentru a putea folosi metode
+// diferite fata de GET si POST in forms in html
+app.use(methodOverride("_method"));
 
 // route-ul pentru homepage
 app.get("/", (req, res) => {
