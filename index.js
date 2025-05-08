@@ -15,6 +15,7 @@ const userRouter = require("./routes/user");
 const recipeRouter = require("./routes/recipe");
 const menuRouter = require("./routes/menu");
 const reviewRouter = require("./routes/review");
+const ExpressError = require("./utility/ExpressError");
 
 // conectam la baza de date MongoDB folosind Mongoose
 main().catch((err) => console.log(err));
@@ -51,6 +52,19 @@ app.use("/users", userRouter);
 app.use("/recipes", recipeRouter);
 app.use("/menus", menuRouter);
 app.use("/recipes/:id/reviews", reviewRouter);
+
+// ultimul route pentru a prinde toate ceririle gresite intr un 404
+// folosim un regex pentru a prinde orice cerere
+app.all(/(.*)/, (req, res, next) => {
+  next(new ExpressError("pagina nu a fost gasita", 404));
+});
+
+// middleware pentru a prinde erorile
+app.use((err, req, res, next) => {
+  const { statusCode = 500 } = err; // statusCode va avea un default de 500
+  if (!err.message) err.messge = "Something went wrong"; // setam mesajul de eroare default
+  res.status(statusCode).render("error", { err });
+});
 
 const PORT = process.env.PORT || 3000; // definirea portului dinamic, avand un default de 3000
 app.listen(PORT, () => {});
