@@ -8,6 +8,8 @@ if (process.env.NODE_ENV !== "production") {
 const express = require("express");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
+const ejsMate = require("ejs-mate");
+const path = require("path");
 
 const userRouter = require("./routes/user");
 const recipeRouter = require("./routes/recipe");
@@ -25,6 +27,9 @@ async function main() {
 const app = express();
 
 // MIDDLEWARES
+app.engine("ejs", ejsMate); // adauga functionalitati de template pentru EJS
+app.set("view engine", "ejs"); // setam EJS ca motor de template
+app.set("views", path.join(__dirname, "views")); // setam calea pentru fisierul de views
 
 //folosim method-override pentru a putea folosi metode
 // diferite fata de GET si POST in forms in html
