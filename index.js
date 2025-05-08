@@ -31,6 +31,8 @@ app.engine("ejs", ejsMate); // adauga functionalitati de template pentru EJS
 app.set("view engine", "ejs"); // setam EJS ca motor de template
 app.set("views", path.join(__dirname, "views")); // setam calea pentru fisierul de views
 
+app.use(express.static(path.join(__dirname, "public"))); // calarea fisierelor statice
+
 //folosim method-override pentru a putea folosi metode
 // diferite fata de GET si POST in forms in html
 app.use(methodOverride("_method"));
