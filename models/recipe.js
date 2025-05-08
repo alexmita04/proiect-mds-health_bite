@@ -65,6 +65,12 @@ const recipeSchema = new Schema({
     enum: ["breakfast", "lunch", "dinner", "snack"],
     required: true,
   },
+  reviews: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Review",
+    },
+  ],
 });
 
 const Recipe = mongoose.model("Recipe", recipeSchema);

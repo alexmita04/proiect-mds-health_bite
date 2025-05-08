@@ -8,6 +8,11 @@ if (process.env.NODE_ENV !== "production") {
 const express = require("express");
 const mongoose = require("mongoose");
 
+const userRouter = require("./routes/user");
+const recipeRouter = require("./routes/recipe");
+const menuRouter = require("./routes/menu");
+const reviewRouter = require("./routes/review");
+
 // conectam la baza de date MongoDB folosind Mongoose
 main().catch((err) => console.log(err));
 async function main() {
@@ -18,9 +23,16 @@ async function main() {
 // crearea unei aplicatii Express
 const app = express();
 
+// route-ul pentru homepage
 app.get("/", (req, res) => {
   res.send("homepage");
 });
+
+// configurare routere
+app.use("/users", userRouter);
+app.use("/recipes", recipeRouter);
+app.use("/menus", menuRouter);
+app.use("/recipes/:id/reviews", reviewRouter);
 
 const PORT = process.env.PORT || 3000; // definirea portului dinamic, avand un default de 3000
 app.listen(PORT, () => {});
