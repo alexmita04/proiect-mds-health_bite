@@ -15,5 +15,9 @@ async function main() {
 
 const app = express();
 
+app.get("/", (req, res) => {
+  res.send("homepage");
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {});
