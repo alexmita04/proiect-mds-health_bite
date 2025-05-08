@@ -44,7 +44,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // route-ul pentru homepage
 app.get("/", (req, res) => {
-  res.send("homepage");
+  res.render("homepage");
 });
 
 // configurare routere
@@ -63,7 +63,8 @@ app.all(/(.*)/, (req, res, next) => {
 app.use((err, req, res, next) => {
   const { statusCode = 500 } = err; // statusCode va avea un default de 500
   if (!err.message) err.messge = "Something went wrong"; // setam mesajul de eroare default
-  res.status(statusCode).render("error", { err });
+  // res.status(statusCode).render("error", { err });
+  res.send(err.message);
 });
 
 const PORT = process.env.PORT || 3000; // definirea portului dinamic, avand un default de 3000
