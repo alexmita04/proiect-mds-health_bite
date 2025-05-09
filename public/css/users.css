@@ -1,4 +1,5 @@
-.container-login {
+.container-login,
+.container-register {
   display: flex;
   flex-direction: column;
   max-width: 600px;
@@ -8,27 +9,32 @@
   height: calc(100vh - 68px - 56px);
 }
 
-.container-login h1 {
+.container-login h1,
+.container-register h1 {
   font-size: 50px;
   margin-top: 100px;
 }
 
-.container-login h1 span {
+.container-login h1 span,
+.container-register h1 span {
   color: var(--culoare-2);
 }
 
-.container-login form {
+.container-login form,
+.container-register form {
   display: flex;
   flex-direction: column;
   gap: 20px;
   align-items: start;
 }
 
-.container-login form > div {
+.container-login form > div,
+.container-register form > div {
   width: 100%;
 }
 
-.container-login form button {
+.container-login form button,
+.container-register form button {
   font-size: 18px;
   padding: 10px 15px;
   border: 1px solid var(--culoare-text);
@@ -38,7 +44,8 @@
   transition: all 0.5s;
 }
 
-.container-login form button:hover {
+.container-login form button:hover,
+.container-register form button:hover {
   background-color: var(--culoare-1);
   color: var(--culoare-text);
 }

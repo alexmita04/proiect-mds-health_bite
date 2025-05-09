@@ -3,14 +3,16 @@ exports.showLogin = (req, res) => {
 };
 
 exports.login = async (req, res) => {
+  console.log(req.body.users);
   res.send("login");
 };
 
 exports.showRegister = (req, res) => {
-  res.send("show register");
+  res.render("users/register");
 };
 
 exports.register = async (req, res) => {
+  console.log(req.body.users);
   res.send("register");
 };
 

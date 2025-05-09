@@ -1,7 +1,7 @@
 <% layout('/layouts/boilerplate') %>
-<div class="container-login">
-  <h1>Login<span>.</span></h1>
-  <form action="/users/login" method="post">
+<div class="container-register">
+  <h1>Register<span>.</span></h1>
+  <form action="/users/register" method="post">
     <div class="mb-3">
       <label for="username" class="form-label">Username</label>
       <input
@@ -12,6 +12,10 @@
       />
     </div>
     <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" name="users[email]" />
+    </div>
+    <div class="mb-3">
       <label for="password" class="form-label">Password</label>
       <input
         type="password"
@@ -20,6 +24,6 @@
         name="users[password]"
       />
     </div>
-    <button type="submit">Login</button>
+    <button type="submit">Register</button>
   </form>
 </div>
