@@ -1,5 +1,5 @@
 exports.showLogin = (req, res) => {
-  res.send("show login");
+  res.render("users/login");
 };
 
 exports.login = async (req, res) => {
