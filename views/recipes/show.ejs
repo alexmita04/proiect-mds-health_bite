@@ -1,0 +1,59 @@
+<% layout('/layouts/boilerplate') %>
+<div class="container-recipe">
+  <div class="container-recipe-left">
+    <h1><%= recipe.title %></h1>
+    <p><%= recipe.description %></p>
+    <div class="lista">
+      <ul>
+        <p>Ingrediente:</p>
+        <% for( let ingredient of recipe.ingredients) { %>
+        <li>
+          <%= ingredient.name %> - <span><%= ingredient.quantity %>g</span>
+        </li>
+        <% } %>
+      </ul>
+      <ul>
+        <p>Valori Nutritionale:</p>
+        <li>Calorii: <span><%= recipe.nutritionalInfo.calories %></span></li>
+        <li>Proteine: <span><%= recipe.nutritionalInfo.protein %></span></li>
+        <li>Grasimi: <span><%= recipe.nutritionalInfo.fats %></span></li>
+        <li>
+          Carbohidrati: <span><%= recipe.nutritionalInfo.carbohydrates %></span>
+        </li>
+      </ul>
+    </div>
+
+    <p>Instructiuni: <%= recipe.instructions %></p>
+    <p>Timp de preparare: <span><%= recipe.cookingTime %></span> minute</p>
+    <p>Dificultate: <span><%= recipe.difficulty %></span></p>
+
+    <p>Tipul mesei: <span><%= recipe.mealType %></span></p>
+    <p>Categorie: <span><%= recipe.category %></span></p>
+  </div>
+  <div class="container-recipe-right">
+    <h2>Adauga un Review</h2>
+    <form action="/reviews" method="POST">
+      <div class="mb-3">
+        <label for="comment" class="form-label">Mesaj</label>
+        <input
+          type="text"
+          class="form-control"
+          id="comment"
+          name="review[comment]"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="rating" class="form-label">Rating</label>
+        <input
+          type="range"
+          class="form-range"
+          min="1"
+          max="5"
+          id="rating"
+          name="review[comment]"
+        />
+      </div>
+      <button type="submit">Create</button>
+    </form>
+  </div>
+</div>

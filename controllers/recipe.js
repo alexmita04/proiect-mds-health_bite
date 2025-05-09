@@ -5,6 +5,8 @@ exports.showRecipes = async (req, res, next) => {
   res.render("recipes/index", { recipes });
 };
 
-exports.showRecipe = (req, res) => {
-  res.send("show recipe");
+exports.showRecipe = async (req, res, next) => {
+  const { id } = req.params;
+  const recipe = await Recipe.findById(id);
+  res.render("recipes/show", { recipe });
 };
