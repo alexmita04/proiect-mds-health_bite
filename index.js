@@ -82,7 +82,7 @@ app.use((req, res, next) => {
   // a putea fi randat in view
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
-  console.log(res.locals.returnTo);
+  // console.log(res.locals.returnTo);
 
   // sa aveam acces si in views la obiectul user pus la dispozitie de passport
   res.locals.currentUser = req.user;

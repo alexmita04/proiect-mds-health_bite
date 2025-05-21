@@ -3,12 +3,7 @@ const { mongoose } = require("mongoose");
 const { Schema } = mongoose;
 
 const reviewSchema = new Schema({
-  recipe: {
-    type: Schema.Types.ObjectId,
-    ref: "Recipe",
-    required: [true, "Recipe ID is required"],
-  },
-  user: {
+  author: {
     type: Schema.Types.ObjectId,
     ref: "User",
     required: [true, "User ID is required"],
