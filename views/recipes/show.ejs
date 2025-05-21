@@ -29,6 +29,8 @@
 
     <p>Tipul mesei: <span><%= recipe.mealType %></span></p>
     <p>Categorie: <span><%= recipe.category %></span></p>
+
+    <button id="export-btn">Exportă Lista de Cumpărături</button>
   </div>
   <div class="container-recipe-right">
     <h2>Adauga un Review</h2>
@@ -76,3 +78,26 @@
     </div>
   </div>
 </div>
+
+<script>
+  document.getElementById("export-btn").addEventListener("click", function () {
+    const items = document.querySelectorAll(".lista ul:first-of-type li");
+    let content = "Lista de Cumparaturi:\n\n";
+
+    items.forEach((item) => {
+      content += "- " + item.textContent.trim() + "\n";
+    });
+
+    // Creare fișier text
+    const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+
+    // Trigger download
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "lista-cumparaturi.txt";
+    a.click();
+
+    URL.revokeObjectURL(url);
+  });
+</script>

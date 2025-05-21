@@ -6,7 +6,7 @@ exports.showLogin = (req, res) => {
 
 exports.login = async (req, res) => {
   req.flash("success", "Bine ai revenit!");
-  const redirectUrl = req.session.returnTo || "/recipes";
+  const redirectUrl = res.locals.returnTo || "/recipes";
   // delete req.session.returnTo;
   res.redirect(redirectUrl);
 };

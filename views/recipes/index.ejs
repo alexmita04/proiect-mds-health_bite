@@ -1,6 +1,41 @@
 <% layout('/layouts/boilerplate') %>
+
 <div class="container-recipes">
   <h1>Retete</h1>
+<form method="GET" action="/recipes" class="mb-4">
+  <div class="row g-3">
+    <div class="col-md-3">
+      <select name="mealType" class="form-select">
+        <option value="">Tip Masa</option>
+        <option value="weight loss" <%= req.query.mealType === 'weight loss' ? 'selected' : '' %>>Slabit</option>
+        <option value="muscle gain" <%= req.query.mealType === 'muscle gain' ? 'selected' : '' %>>Masa Musculara</option>
+        <option value="maintenance" <%= req.query.mealType === 'maintenance' ? 'selected' : '' %>>Mentinere</option>
+        <option value="low-carb" <%= req.query.mealType === 'low-carb' ? 'selected' : '' %>>Low Carb</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <select name="category" class="form-select">
+        <option value="">Categorie</option>
+        <option value="breakfast" <%= req.query.category === 'breakfast' ? 'selected' : '' %>>Mic Dejun</option>
+        <option value="lunch" <%= req.query.category === 'lunch' ? 'selected' : '' %>>Pranz</option>
+        <option value="dinner" <%= req.query.category === 'dinner' ? 'selected' : '' %>>Cina</option>
+        <option value="snack" <%= req.query.category === 'snack' ? 'selected' : '' %>>Gustare</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <select name="difficulty" class="form-select">
+        <option value="">Dificultate</option>
+        <option value="easy" <%= req.query.difficulty === 'easy' ? 'selected' : '' %>>Usoara</option>
+        <option value="medium" <%= req.query.difficulty === 'medium' ? 'selected' : '' %>>Medie</option>
+        <option value="hard" <%= req.query.difficulty === 'hard' ? 'selected' : '' %>>Greu</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <button type="submit" class="btn btn-primary w-100">Filtreaza</button>
+    </div>
+  </div>
+</form>
+
   <div class="row g-4">
     <% for(let recipe of recipes) { %>
     <div class="col-md-4">

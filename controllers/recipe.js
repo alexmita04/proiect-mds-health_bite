@@ -1,9 +1,21 @@
 const Recipe = require("../models/recipe");
 
 exports.showRecipes = async (req, res, next) => {
-  // const recipes = await Recipe.find().limit(20);
-  const recipes = await Recipe.find();
-  res.render("recipes/index", { recipes });
+  const queryObj = {};
+
+  if (req.query.mealType) queryObj.mealType = req.query.mealType;
+  if (req.query.category) queryObj.category = req.query.category;
+  if (req.query.difficulty) queryObj.difficulty = req.query.difficulty;
+
+  try {
+    const recipes = await Recipe.find(queryObj);
+    res.render("recipes/index", {
+      recipes,
+      req,
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 exports.showRecipe = async (req, res, next) => {
