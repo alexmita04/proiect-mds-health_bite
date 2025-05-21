@@ -1,4 +1,6 @@
 const Review = require("./models/review");
+const { reviewSchema } = require("./schemas");
+const ExpressError = require("./utility/ExpressError");
 
 exports.isLoggedIn = (req, res, next) => {
   // console.log("req user: ", req.user);
@@ -25,4 +27,14 @@ exports.isAuthorReview = async (req, res, next) => {
     return res.redirect(`/recipes/${id}`);
   }
   next();
+};
+
+exports.validateReview = function (req, res, next) {
+  const result = reviewSchema.validate(req.body);
+  console.log(req.body);
+  console.log(result);
+  if (result.error) {
+    const msg = result.error.details.map((el) => el.message).join(",");
+    throw new ExpressError(msg, 400);
+  }
 };
