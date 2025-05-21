@@ -69,7 +69,11 @@ app.use(passport.initialize());
 // acest middleware face conexiunea intre express-session si passport
 app.use(passport.session());
 
+// setarea unei strategii locale
 passport.use(new LocalStrategy(User.authenticate()));
+
+// serializarea unui user stabileste ce detalii despre acesta
+// vor fi stocate in session, in cazul nostru doar id-ul
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -78,6 +82,10 @@ app.use((req, res, next) => {
   // a putea fi randat in view
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
+
+  // sa aveam acces si in views la obiectul user pus la dispozitie de passport
+  res.locals.currentUser = req.user;
+  // console.log(req.user);
   next();
 });
 

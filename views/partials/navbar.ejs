@@ -7,9 +7,16 @@
         <li class="nav-li"><a href="/menus/test/users/test">Meniuri</a></li>
       </ul>
       <ul class="right-navbar">
+        <% if (!currentUser) { %>
         <li class="nav-li"><a href="/users/login">Login</a></li>
         <li class="nav-li"><a href="/users/register">Register</a></li>
-        <li class="nav-li"><a href="">Logout</a></li>
+        <% }else{ %>
+        <li class="nav-li">
+          <form action="/users/logout" method="post">
+            <button type="submit">Logout</button>
+          </form>
+        </li>
+        <% } %>
       </ul>
     </div>
   </nav>

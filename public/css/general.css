@@ -169,13 +169,21 @@ nav {
   color: var(--culoare-2);
 }
 
-.nav-container .nav-li a {
+.nav-container .nav-li a,
+.nav-container .nav-li button {
   transition: 0.5s all;
 }
 
-.nav-container .nav-li a:hover {
+.nav-container .nav-li a:hover,
+.nav-container .nav-li button:hover {
   color: var(--culoare-2);
   text-decoration: underline;
+}
+
+.nav-container .nav-li button {
+  background-color: transparent;
+  color: var(--culoare-text);
+  border: none;
 }
 
 .nav-container .right-navbar {
