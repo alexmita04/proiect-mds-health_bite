@@ -1,0 +1,22 @@
+<% layout('/layouts/boilerplate') %>
+<div class="menu-main-container">
+  <h1><%= menu.name %></h1>
+  <div class="day-container">
+    <% const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday",
+    "Friday", "Saturday", "Sunday"]; %> <% for (let i = 0; i <
+    daysOfWeek.length; i++) { %>
+    <div class="day-block">
+      <h3>Ziua <%= i + 1 %></h3>
+      <ul>
+        <% const recipesForDay = menu.recipes.filter(r => r.day ===
+        daysOfWeek[i]); recipesForDay.forEach(recipeItem => { const recipe =
+        recipeItem.recipe; %>
+        <li>
+          <a href="/recipes/<%= recipe._id %>"><%= recipe.title %></a>
+        </li>
+        <% }); %>
+      </ul>
+    </div>
+    <% } %>
+  </div>
+</div>

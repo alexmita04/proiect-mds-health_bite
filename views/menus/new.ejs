@@ -1,5 +1,97 @@
 <% layout('/layouts/boilerplate') %>
 <div class="new-menu-container">
   <h1>Creeaza un nou meniu</h1>
-  <form action="/menus"></form>
+  <form action="/menus" method="post">
+    <div class="meal-type">
+      <p class="heading">Alege tipul de meniu</p>
+      <select class="form-select" name="mealType">
+        <option selected value="weight loss">Weight Loss</option>
+        <option value="muscle gain">Muscle Gain</option>
+        <option value="maintenance">Maintenance</option>
+        <option value="low-carb">Low Carb</option>
+      </select>
+    </div>
+
+    <div class="recipe-per-day">
+      <p class="heading">
+        Doresti sa incluzi si o gustare (sanatoasa) in fiecare zi?
+      </p>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="fourMeals"
+          id="snackYes"
+          value="da"
+          checked
+        />
+        <label class="form-check-label" for="snackYes"> Da </label>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="fourMeals"
+          id="snackNo"
+          value="nu"
+        />
+        <label class="form-check-label" for="snackNo"> Nu </label>
+      </div>
+    </div>
+
+    <div class="difficulty">
+      <p class="heading">Alege dificultatea meniului</p>
+      <select class="form-select" name="difficulty">
+        <option selected value="easy">Usor</option>
+        <option value="medium">Mediu</option>
+        <option value="hard">Greu</option>
+      </select>
+    </div>
+
+    <div class="max-cooking-time">
+      <p class="heading">Timpul maxim de pregatire</p>
+      <div class="input-group">
+        <span class="input-group-text">max</span>
+        <input
+          type="number"
+          class="form-control"
+          min="10"
+          max="60"
+          name="maxCookingTime"
+        />
+      </div>
+    </div>
+
+    <div class="max-calories">
+      <p class="heading">Numarul maxim de calorii</p>
+      <div class="input-group">
+        <input
+          type="number"
+          class="form-control"
+          min="100"
+          max="500"
+          name="maxCalories"
+        />
+        <span class="input-group-text">/masa</span>
+      </div>
+    </div>
+
+    <div class="ingredients">
+      <p class="heading">Alege ingredientele care nu iti plac:</p>
+      <div class="ingredient-checkbox-grid">
+        <% for( let ingredient of ingredients) { %>
+        <label>
+          <input
+            type="checkbox"
+            name="dislikedIngredients"
+            value="<%= ingredient %>"
+          />
+          <%= ingredient %>
+        </label>
+        <% } %>
+      </div>
+    </div>
+
+    <button type="submit">Creaza</button>
+  </form>
 </div>

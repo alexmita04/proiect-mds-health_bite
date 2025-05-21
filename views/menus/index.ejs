@@ -1,17 +1,20 @@
 <% layout('/layouts/boilerplate') %>
 <div class="menus-main-container">
-  <h1>Aici vei avea toate meniurile</h1>
+  <h1>Meniuri</h1>
+  <button class="new-menu-btn">
+    <a href="/menus/new">Creeaza un nou meniu</a>
+  </button>
   <div class="card-container">
-    <% for( let index = 0; index < 40; index++ ) { %>
+    <% for( let menu of menus ) { %>
     <div class="card" style="width: 18rem">
-      <img src="..." class="card-img-top" alt="..." />
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card’s content.
-        </p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <h5 class="card-title"><%= menu.name %></h5>
+        <a href="/menus/<%= menu._id %>" class="btn btn-primary">Vezi meniul</a>
+        <% if (currentUser._id.equals(menu.createdBy)) { %>
+        <form action="/menus/<%= menu._id %>?_method=delete" method="post">
+          <button type="submit">Delete</button>
+        </form>
+        <% } %>
       </div>
     </div>
     <% } %>

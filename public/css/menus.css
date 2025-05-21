@@ -2,6 +2,53 @@
   font-size: 36px;
 }
 
+.new-menu-container {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  width: 100%;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  gap: 30px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.new-menu-container form {
+  width: 100%;
+  /* text-align: start; */
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.new-menu-container form .heading {
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.new-menu-container form .ingredients .ingredient-checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+
+.new-menu-container form button {
+  font-size: 20px;
+  align-self: start;
+  padding: 15px 10px;
+  border-radius: 15px;
+  background-color: transparent;
+  color: var(--culoare-text);
+  border: 2px solid var(--culoare-text);
+  transition: 0.5s all;
+}
+
+.new-menu-container form button:hover {
+  background-color: var(--culoare-2);
+}
+
 .menus-main-container {
   display: flex;
   flex-direction: column;
@@ -16,10 +63,66 @@
   font-size: 32px;
 }
 
+.menus-main-container .new-menu-btn {
+  font-size: 32px;
+  padding: 20px 15px;
+  background-color: transparent;
+  color: var(--culoare-text);
+  border: 3px solid var(--culoare-text);
+  border-radius: 25px;
+  transition: all 0.5s;
+}
+.menus-main-container button {
+  background-color: var(--culoare-2);
+  padding: 10px;
+  margin-top: 5px;
+  color: var(--culoare-text);
+  border-radius: 10px;
+}
+
+.menus-main-container .new-menu-btn:hover {
+  background-color: var(--culoare-2);
+}
+
 .menus-main-container .card-container {
   width: 100%;
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.menu-main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.menu-main-container h1 {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+.menu-main-container .day-container h3 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.menu-main-container .day-container .day-block {
+  text-align: center;
+  margin-bottom: 20px;
+  border: 2px solid var(--culoare-text);
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.menu-main-container .day-container .day-block a {
+  color: var(--culoare-2);
+  transition: 0.5s all;
+}
+
+.menu-main-container .day-container .day-block a:hover {
+  color: var(--culoare-text);
 }

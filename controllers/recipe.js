@@ -1,7 +1,8 @@
 const Recipe = require("../models/recipe");
 
 exports.showRecipes = async (req, res, next) => {
-  const recipes = await Recipe.find().limit(20);
+  // const recipes = await Recipe.find().limit(20);
+  const recipes = await Recipe.find();
   res.render("recipes/index", { recipes });
 };
 

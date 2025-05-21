@@ -1,4 +1,5 @@
 const Review = require("./models/review");
+const Menu = require("./models/menu");
 const { reviewSchema } = require("./schemas");
 const ExpressError = require("./utility/ExpressError");
 
@@ -15,6 +16,16 @@ exports.isLoggedIn = (req, res, next) => {
 exports.storeReturnTo = (req, res, next) => {
   if (req.session.returnTo) {
     res.locals.returnTo = req.session.returnTo;
+  }
+  next();
+};
+
+exports.isAuthor = async (req, res, next) => {
+  const { id } = req.params;
+  const menu = await Menu.findById(id);
+  if (!menu.createdBy.equals(req.user._id)) {
+    req.flash("error", "Nu ai permisiuni sa faci acest lucru!");
+    return res.redirect(`/menu/${id}`);
   }
   next();
 };

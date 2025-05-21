@@ -26,7 +26,7 @@ const seedDb = async () => {
   await Recipe.deleteMany({}); // stergem toate retetele existente in baza de date
   await Review.deleteMany({}); // stergem toate recenziile existente in baza de date
 
-  const n = 500; // numarul de retete pe care dorim sa le cream
+  const n = 2000; // numarul de retete pe care dorim sa le cream
   for (let i = 1; i <= n; i++) {
     const randomIngredientList = [];
     const counterIngredients = getRandomInt(3, 7); // numarul de ingrediente random intr 3 si 7
