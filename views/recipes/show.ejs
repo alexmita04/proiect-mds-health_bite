@@ -55,5 +55,24 @@
       </div>
       <button type="submit">Create</button>
     </form>
+    <div class="reviews-container">
+      <p class="reviews">Reviews:</p>
+      <% for(let review of recipe.reviews ) { %>
+      <div class="review-body">
+        <p>
+          <span><%= review.author.username %></span> - <%= review.comment %>
+        </p>
+        <p>Nota: <%= review.rating %> / 5</p>
+        <% if (review.author.equals(currentUser)) { %>
+        <form
+          action="/recipes/<%= recipe._id %>/reviews/<%= review._id%>?_method=delete"
+          method="post"
+        >
+          <button type="submit">Delete</button>
+        </form>
+        <% } %>
+      </div>
+      <% } %>
+    </div>
   </div>
 </div>

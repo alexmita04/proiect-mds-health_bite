@@ -112,6 +112,7 @@ app.use((err, req, res, next) => {
   const { statusCode = 500 } = err; // statusCode va avea un default de 500
   if (!err.message) err.messge = "Something went wrong"; // setam mesajul de eroare default
   // res.status(statusCode).render("error", { err });
+  console.log(err);
   res.send(err.message);
 });
 
