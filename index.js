@@ -12,12 +12,15 @@ const ejsMate = require("ejs-mate");
 const path = require("path");
 const session = require("express-session");
 const flash = require("connect-flash");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
 
 const userRouter = require("./routes/user");
 const recipeRouter = require("./routes/recipe");
 const menuRouter = require("./routes/menu");
 const reviewRouter = require("./routes/review");
 const ExpressError = require("./utility/ExpressError");
+const User = require("./models/user");
 
 // conectam la baza de date MongoDB folosind Mongoose
 main().catch((err) => console.log(err));
@@ -60,6 +63,15 @@ app.use(session(sessionConfig));
 
 // middleware-ul care ne ajuta sa avem functionalitatea de flash
 app.use(flash());
+
+app.use(passport.initialize());
+
+// acest middleware face conexiunea intre express-session si passport
+app.use(passport.session());
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
   // daca exista un mesaj in flash, va fi atribuit raspunsului pentru
