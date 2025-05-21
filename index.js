@@ -11,6 +11,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const path = require("path");
 const session = require("express-session");
+const flash = require("connect-flash");
 
 const userRouter = require("./routes/user");
 const recipeRouter = require("./routes/recipe");
@@ -56,6 +57,17 @@ const sessionConfig = {
 
 // middleware-ul care se ocupa de stoacarea sesiunii intr-un cookie
 app.use(session(sessionConfig));
+
+// middleware-ul care ne ajuta sa avem functionalitatea de flash
+app.use(flash());
+
+app.use((req, res, next) => {
+  // daca exista un mesaj in flash, va fi atribuit raspunsului pentru
+  // a putea fi randat in view
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  next();
+});
 
 // route-ul pentru homepage
 app.get("/", (req, res) => {
