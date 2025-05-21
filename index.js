@@ -10,6 +10,7 @@ const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const path = require("path");
+const session = require("express-session");
 
 const userRouter = require("./routes/user");
 const recipeRouter = require("./routes/recipe");
@@ -41,6 +42,20 @@ app.use(methodOverride("_method"));
 // folosim acest middleware pentru a face parsing
 // la datele trimise in request body de catre formulare
 app.use(express.urlencoded({ extended: true }));
+
+const sessionConfig = {
+  secret: process.env.SESSIONSECRET,
+  resave: false, // nu mai salvam sesiunea daca nu s-a schimbt nimic
+  saveUninitialized: true, // se salveaza sesiunea chiar daca nu are nicio data
+  cookie: {
+    expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+    httpOnly: true, // foarte important de setata ca cookie-ul sa nu poata fi accesat din client side
+  },
+};
+
+// middleware-ul care se ocupa de stoacarea sesiunii intr-un cookie
+app.use(session(sessionConfig));
 
 // route-ul pentru homepage
 app.get("/", (req, res) => {
