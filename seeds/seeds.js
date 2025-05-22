@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Recipe = require("../models/recipe");
 const Review = require("../models/review");
+const Menu = require("../models/menu");
 const ingredientsList = require("./ingredients");
 const { descriptors, foods } = require("./seedHelpers");
 
@@ -25,6 +26,7 @@ function getRandomInt(min, max) {
 const seedDb = async () => {
   await Recipe.deleteMany({}); // stergem toate retetele existente in baza de date
   await Review.deleteMany({}); // stergem toate recenziile existente in baza de date
+  await Menu.deleteMany({}); // stergem toate recenziile existente in baza de date
 
   const n = 2000; // numarul de retete pe care dorim sa le cream
   for (let i = 1; i <= n; i++) {

@@ -13,6 +13,7 @@ exports.showNewMenu = (req, res) => {
 };
 
 exports.createMenu = async (req, res, next) => {
+  // preluam datele din formular
   const {
     mealType,
     fourMeals,
@@ -29,6 +30,7 @@ exports.createMenu = async (req, res, next) => {
   // console.log(maxCalories);
   // console.log(dislikedIngredients);
 
+  // definim filtrul pe care il vom pasa in mongoose
   const filter = {
     mealType,
     difficulty,
@@ -52,6 +54,7 @@ exports.createMenu = async (req, res, next) => {
     snack: [],
   };
 
+  // punem fiecare reteta in grouped in functie de mealtype
   allRecipes.forEach((recipe) => {
     if (grouped[recipe.category]) {
       grouped[recipe.category].push(recipe);
@@ -77,7 +80,7 @@ exports.createMenu = async (req, res, next) => {
     if (!breakfast || !lunch || !dinner) {
       return res
         .status(400)
-        .json({ message: "Not enough recipes to generate a full menu" });
+        .json({ message: "Nu exista destule retete pentru datele introduse" });
     }
 
     recipesForMenu.push({ recipe: breakfast._id, day });
@@ -88,7 +91,10 @@ exports.createMenu = async (req, res, next) => {
     if (fourMeals === "da") {
       const snack = getRandomRecipe(grouped.snack);
       if (!snack) {
-        return res.status(400).json({ message: "Not enough snack recipes" });
+        return res.status(400).json({
+          message:
+            "Nu exista destule snak-uri pentru datele introduse de dumneavoastra",
+        });
       }
       recipesForMenu.push({ recipe: snack._id, day });
     }
