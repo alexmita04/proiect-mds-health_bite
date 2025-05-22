@@ -14,6 +14,8 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
+const mongoSanitize = require("express-mongo-sanitize");
+const helmet = require("helmet");
 
 const userRouter = require("./routes/user");
 const recipeRouter = require("./routes/recipe");
@@ -21,6 +23,7 @@ const menuRouter = require("./routes/menu");
 const reviewRouter = require("./routes/review");
 const ExpressError = require("./utility/ExpressError");
 const User = require("./models/user");
+const { name } = require("ejs");
 
 // conectam la baza de date MongoDB folosind Mongoose
 main().catch((err) => console.log(err));
@@ -48,6 +51,7 @@ app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true }));
 
 const sessionConfig = {
+  name: "sessionmds",
   secret: process.env.SESSIONSECRET,
   resave: false, // nu mai salvam sesiunea daca nu s-a schimbt nimic
   saveUninitialized: true, // se salveaza sesiunea chiar daca nu are nicio data
@@ -76,6 +80,11 @@ passport.use(new LocalStrategy(User.authenticate()));
 // vor fi stocate in session, in cazul nostru doar id-ul
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+// protejeaza proiectul de mongo injection
+// app.use(mongoSanitize());
+
+app.use(helmet({ contentSecurityPolicy: false }));
 
 app.use((req, res, next) => {
   // daca exista un mesaj in flash, va fi atribuit raspunsului pentru

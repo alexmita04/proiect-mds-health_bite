@@ -3,7 +3,6 @@ const catchAsync = require("../utility/catchAsync");
 const menuController = require("../controllers/menu");
 const { isLoggedIn, isAuthor } = require("../middleware");
 
-// definim un router pentru a gestiona rutele meniurile
 const router = express.Router();
 
 router
