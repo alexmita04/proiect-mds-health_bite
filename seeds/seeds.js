@@ -43,9 +43,15 @@ const seedDb = async () => {
       }
     }
 
-    const randomTitle = `${getRandomElement(foods)} ${getRandomElement(
-      descriptors
-    )}`;
+    const randomFood = getRandomElement(foods);
+    const gender = randomFood.gender;
+    const descriptorList = descriptors[gender] || descriptors.masculin;
+    const descriptor = getRandomElement(descriptorList);
+    const randomTitle = `${randomFood.name} ${descriptor}`;
+
+    // const randomTitle = `${getRandomElement(foods)} ${getRandomElement(
+    //   descriptors
+    // )}`;
 
     const randomCookingTime = getRandomInt(10, 60); // timpul de gatire random intre 10 si 60 de minute
 
