@@ -48,4 +48,5 @@ exports.validateReview = function (req, res, next) {
     const msg = result.error.details.map((el) => el.message).join(",");
     throw new ExpressError(msg, 400);
   }
+  next();
 };
